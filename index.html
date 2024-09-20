@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropID</title>
+    <link rel="stylesheet" href="./src/css/all.css">
+    <script src="./src/lib/xlsx-v0.17.0.js"></script>
+    <script src="./src/lib/jstat.js"></script>
+    <script src="./src/lib/duncan.js"></script>
+    <script src="./src/lib/plotly-v1.58.5.js"></script>
+    <link rel="shortcut icon" href="./src/img/CropID.png" type="image/x-icon">
+  </head>
+
+  <body>
+
+    <div id="container">
+
+      <header>
+        <div class="wrap">
+          <div class="top">
+            <div class="logo">
+              <img src="./src/img/CropID.png" alt="">
+            </div>
+            <div class="menu">
+              <a class="icon home" onclick="setActiveIcon('home')" href="#"><img src="./src/img/menu-analysis.png" alt="Home"></a>
+              <a class="icon input" onclick="setActiveIcon('input')" href="#input"><img src="./src/img/menu-input.png" alt="Input"></a>
+              <a class="icon output" onclick="setActiveIcon('output')" href="#output"><img src="./src/img/menu-output.png" alt="Output"></a>
+            </div>
+          </div>
+          <div class="bottom">
+            <div class="help">
+              <a class="icon help" onclick="setActiveIcon('help')" href="#help"><img src="./src/img/icon-help.png" alt="Help"></a>
+              <span class="icon ozik"><img src="./src/img/icon-ozik.png" alt="Ozik Putra Jarwo"></span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+
+        <section id="home">
+
+          <div id="greet">
+            <div class="left">
+              <p class="title">CropID</p>
+            </div>
+            <div class="center">
+              <input type="text" id="searchInput" placeholder="Cari analisis di sini..." />
+              <div class="search-icon"><img src="./src/img/icon-search.png" alt="Cari Analisis"></div>
+            </div>
+            <div class="right">
+              <a href="#help" onclick="setActiveIcon('help')"><span>Butuh Bantuan?</span></a>
+            </div>
+          </div>
+  
+          <h2>Analisis Varians, Uji Lanjut, & Plot</h2>
+          <div class="type">
+            <div class="ral" data-type="ral">
+              <h3>Rancangan Acak Lengkap</h3>
+              <sub>Randomized Complete Design - RCD</sub>
+              <p class="hide">ANOVA RAL</p>
+              <img src="./src/img/type-avs-ral.png" alt="ral">
+            </div>
+            <div class="ral2f" data-type="ral">
+              <h3>Rancangan Acak Lengkap Faktorial (2)</h3>
+              <sub>Factorial Randomized Complete Design - F-RCD</sub>
+              <p class="hide">ANOVA RAL FAKTORIAL</p>
+              <img src="./src/img/type-avs-ral2f.png" alt="ral2f">
+            </div>
+            <div class="ralpt" data-type="ral">
+              <h3>Rancangan Acak Lengkap Petak Terbagi</h3>
+              <sub>Split Plot Randomized Complete Design - SP-RCD</sub>
+              <p class="hide">ANOVA RAL SPLIT PLOT</p>
+              <img src="./src/img/type-avs-ralpt.png" alt="ralpt">
+            </div>
+            <div class="ralpb" data-type="ral" data-status="Segera Hadir">
+              <h3>Rancangan Acak Lengkap Petak Berjalur</h3>
+              <sub>Strip Plot Randomized Complete Design - STP-RCD</sub>
+              <p class="hide">ANOVA RAL STRIP PLOT</p>
+              <img src="./src/img/type-avs-ralpb.png" alt="ralpb">
+            </div>
+            <div class="ralt" data-type="ral" data-status="Segera Hadir">
+              <h3>Rancangan Acak Lengkap Tersarang</h3>
+              <sub>Nested Randomized Complete Design - N-RCD</sub>
+              <p class="hide">ANOVA RAL NESTED</p>
+              <img src="./src/img/type-avs-ralt.png" alt="ralt">
+            </div>
+            <div class="rak" data-type="rak">
+              <h3>Rancangan Acak Kelompok</h3>
+              <sub>Randomized Block Design - RBD</sub>
+              <p class="hide">ANOVA RAK</p>
+              <img src="./src/img/type-avs-rak.png" alt="rak">
+            </div>
+            <div class="rak2f" data-type="rak">
+              <h3>Rancangan Acak Kelompok Faktorial (2)</h3>
+              <sub>Factorial Randomized Block Design - F-RBD</sub>
+              <p class="hide">ANOVA RAK FAKTORIAL</p>
+              <img src="./src/img/type-avs-rak2f.png" alt="rak2f">
+            </div>
+            <div class="rakpt" data-type="rak">
+              <h3>Rancangan Acak Kelompok Petak Terbagi</h3>
+              <sub>Split Plot Randomized Block Design - SP-RBD</sub>
+              <p class="hide">ANOVA RAK</p>
+              <img src="./src/img/type-avs-rakpt.png" alt="rakpt">
+            </div>
+            <div class="rakpb" data-type="rak" data-minus="Uji Lanjut">
+              <h3>Rancangan Acak Kelompok Petak Berjalur</h3>
+              <sub>Strip Plot Randomized Block Design - STP-RBD</sub>
+              <p class="hide">ANOVA RAK STRIP PLOT</p>
+              <img src="./src/img/type-avs-rakpb.png" alt="rakpb">
+            </div>
+            <div class="rakt" data-type="rak" data-status="Segera Hadir">
+              <h3>Rancangan Acak Kelompok Tersarang</h3>
+              <sub>Nested Randomized Block Design - N-RBD</sub>
+              <p class="hide">ANOVA RAK NESTED</p>
+              <img src="./src/img/type-avs-rakt.png" alt="rakt">
+            </div>
+            <div class="rakl" data-type="rakl" data-status="Segera Hadir">
+              <h3>Rancangan Acak Kelompok Lengkap</h3>
+              <sub>Randomized Complete Block Design - RCBD</sub>
+              <p class="hide">ANOVA</p>
+              <img src="./src/img/type-avs-rakl.png" alt="rakl">
+            </div>
+            <div class="rakl2f" data-type="rakl" data-status="Segera Hadir">
+              <h3>Rancangan Acak Kelompok Lengkap Faktorial (2)</h3>
+              <sub>Factorial Randomized Complete Block Design - F-RCBD</sub>
+              <p class="hide">ANOVA</p>
+              <img src="./src/img/type-avs-rakl2f.png" alt="rakl2f">
+            </div>
+            <div class="raklt" data-type="rakl" data-status="Segera Hadir">
+              <h3>Rancangan Acak Kelompok Lengkap Tersarang</h3>
+              <sub>Nested Randomized Complete Block Design - N-RCBD</sub>
+              <p class="hide">ANOVA</p>
+              <img src="./src/img/type-avs-raklt.png" alt="raklt">
+            </div>
+            <div class="rbsl" data-type="rbsl">
+              <h3>Rancangan Bujur Sangkar Latin</h3>
+              <sub>Latin Square Design - LSD</sub>
+              <p class="hide">ANOVA RBSL</p>
+              <img src="./src/img/type-avs-rbsl.png" alt="rbsl">
+            </div>
+            <div class="rbslpt" data-type="rbsl" data-status="Segera Hadir">
+              <h3>Rancangan Bujur Sangkar Latin Petak Terbagi</h3>
+              <sub>Split Plot Latin Square Design - SP-LSD</sub>
+              <p class="hide">ANOVA RBSL</p>
+              <img src="./src/img/type-avs-rbslpt.png" alt="rbslpt">
+            </div>
+            <div class="rbslg" data-type="rbsl">
+              <h3>Rancangan Bujur Sangkar Latin Graeco</h3>
+              <sub>Graeco-Latin Square Design - G-LSD</sub>
+              <p class="hide">ANOVA RBSL GRAECO GRECO</p>
+              <img src="./src/img/type-avs-rbslg.png" alt="rbslg">
+            </div>
+            <div class="rba" data-type="rba">
+              <h3>Rancangan Beralih</h3>
+              <sub>Cross-Over Design - COD</sub>
+              <p class="hide">ANOVA</p>
+              <img src="./src/img/type-avs-rba.png" alt="rba">
+            </div>
+          </div>
+          
+          <h2>Pengujian</h2>
+          <div class="type">
+            <div class="hml" data-status="Segera Hadir">
+              <h3>Hukum Mitscherlich</h3>
+              <sub>Mitscherlich Law</sub>
+              <p>Model pertumbuhan tanaman yang menjelaskan hubungan hasil dengan pasokan hara.</p>
+              <img src="./src/img/type-hml.png" alt="hml">
+            </div>
+            <div class="ujt" data-status="Segera Hadir">
+              <h3>Uji T</h3>
+              <sub>T Test</sub>
+              <p>Menguji apakah terdapat perbedaan yang signifikan antara rata-rata dua kelompok.</p>
+              <img src="./src/img/type-ujt.png" alt="ujt">
+            </div>
+            <div class="isat">
+              <h3>Indeks Total Abiotik Tanaman</h3>
+              <sub>Plant Abiotic Totals Index - PASI</sub>
+              <p>Alat 9 in 1: indeks toleransi, kerentanan, Total, keberlanjutan hasil, dan lain-lain.</p>
+              <p class="hide">Indeks Toleransi Total (ITS) Totals Tolerance Index (STI), Indeks Kerentanan Total (IKS) Totals Susceptibility Index (SSI), Indeks Toleransi (ITO) Tolerance Index (TOL), Indeks Keberlanjutan Hasil (IKH) Yield Stability Index (YSI), Indeks Hasil Geometris (IHG) Geometric Mean Productivity (GMP), Indeks Harmonik Hasil (IHH) Harmonic Mean (HM), Indeks Rata-rata Hasil Relatif (IRHR) Mean Productivity (MP), Indeks Rata-rata Geometris Relatif (IRGR) Relative Geometric Mean Productivity (RGMP), Indeks Rata-rata Harmonik Relatif (IRHR) Relative Harmonic Mean Productivity (RHMP)</p>
+              <img src="./src/img/type-isat.png" alt="isat">
+          </div>
+          </div>
+
+          <h2>Laju Pertumbuhan</h2>
+          <div class="type">
+            <div class="lpt">
+              <h3>Laju Pertumbuhan Tanaman</h3>
+              <sub>Crop Growth Rate - CGR</sub>
+              <p>Mengukur pertambahan biomassa tanaman.</p>
+              <img src="./src/img/type-lpt.png" alt="lpt">
+            </div>
+            <div class="lpn">
+              <h3>Laju Pertumbuhan Nisbi</h3>
+              <sub>Relative Growth Rate - RGR</sub>
+              <p>Mengukur pertumbuhan relatif (nisbi) tanaman.</p>
+              <img src="./src/img/type-lpn.png" alt="lpn">
+            </div>
+            <div class="lab">
+              <h3>Laju Asimilasi Bersih</h3>
+              <sub>Net Assimilation Rate - NAR</sub>
+              <p>Mengukur efisiensi fotosintesis tanaman.</p>
+              <img src="./src/img/type-lab.png" alt="lab">
+            </div>
+          </div>
+
+          <h2>Daun</h2>
+          <div class="type">
+            <div class="ild">
+              <h3>Indeks Luas Daun</h3>
+              <sub>Leaf Area Index - LAI</sub>
+              <p>Mengukur luas daun per unit area.</p>
+              <img src="./src/img/type-ild.png" alt="ild">
+            </div>
+            <div class="ldg">
+              <h3>Luas Daun: Gravimeter</h3>
+              <sub>Leaf Area: Gravimetry</sub>
+              <p>Mengukur luas daun dengan metode gravimetri (replika).</p>
+              <img src="./src/img/type-ild.png" alt="ldg">
+            </div>
+            <div class="ldp">
+              <h3>Luas Daun: Punch</h3>
+              <sub>Leaf Area: Punch</sub>
+              <p>Mengukur luas daun dengan metode punch (hole).</p>
+              <img src="./src/img/type-ild.png" alt="ldp">
+            </div>
+            <div class="lds">
+              <h3>Luas Daun Spesifik</h3>
+              <sub>Specific Leaf Area - SLA</sub>
+              <p>Mengukur luas daun per satuan berat kering daun.</p>
+              <img src="./src/img/type-ild.png" alt="lds">
+            </div>
+            <div class="nld">
+              <h3>Nisbah Luas Daun</h3>
+              <sub>Leaf Area Ratio - LAR</sub>
+              <p>Mengukur luas daun relatif terhadap berat kering total tanaman.</p>
+              <img src="./src/img/type-ild.png" alt="nld">
+            </div>
+            <div class="nbd">
+              <h3>Nisbah Berat Daun</h3>
+              <sub>Leaf Weight Ratio - LWR</sub>
+              <p>Mengukur proporsi berat daun terhadap berat kering total tanaman.</p>
+              <img src="./src/img/type-ild.png" alt="nbd">
+            </div>
+            <div class="dld">
+              <h3>Durasi Luas Daun</h3>
+              <sub>Leaf Area Duration - LAD</sub>
+              <p>Mengukur akumulasi luas daun selama periode tertentu.</p>
+              <img src="./src/img/type-ild.png" alt="dld">
+            </div>
+          </div>
+
+          <h2>Rasio Berat & Panen</h2>
+          <div class="type">
+            <div class="inp">
+              <h3>Indeks Panen</h3>
+              <sub>Harvest Index - HI</sub>
+              <p>Mengukur efisiensi produksi bagian ekonomis tanaman.</p>
+              <img src="./src/img/type-inp.png" alt="inp">
+            </div>
+            <div class="npa">
+              <h3>Nisbah Pucuk-Akar</h3>
+              <sub>Shoot-Root Ratio - SRR</sub>
+              <p>Mengukur perbandingan biomassa akar dan tajuk.</p>
+              <img src="./src/img/type-npa.png" alt="npa">
+            </div>
+            <div class="nba">
+              <h3>Nisbah Berat Akar</h3>
+              <sub>Root Weight Ratio - RWR</sub>
+              <p>Mengukur proporsi berat akar terhadap berat kering total tanaman.</p>
+              <img src="./src/img/type-nba.png" alt="nba">
+            </div>
+          </div>
+
+        </section>
+        
+        <section id="input">
+
+          <div class="left">
+            <div class="select-sheet"></div>
+            <div id="table-wrapper">
+              <div id="nama-file" class="hide"><img src="./src/img/icon-excel.png" alt="Excel File Name"><span></span></div>
+              <div id="edit-file"><img src="./src/img/icon-edit.png" alt="Edit File"></div>
+              <div id="ubah-file"><img src="./src/img/icon-restart.png" alt="Ubah File"></div>
+              <div id="table-container"><table><td>Pilih lembar terlebih dahulu</td></table></div>
+            </div>
+            <div id="file">
+              <div class="text">
+                <p>Unggah filemu</p>
+                <span>File harus berekstensi Excel</span>
+              </div>
+              <label for="file-input" class="drop-container" id="dropcontainer">
+                <img src="./src/img/icon-file.png" alt="Upload">
+                <span class="drop-title">Letakkan file di sini</span>
+                <input type="file" id="file-input" accept=".xls,.xlsx,.xlsm,.xlsb,.xlt,.xltx,.xltm,.csv">
+              </label>
+              <div class="text">
+                <span>Atau unduh contoh data <a href="#">di sini</a></span>  
+              </div>
+            </div>
+          </div>
+
+          <div class="right">
+
+            <div class="wrap">
+
+              <p class="sec-title">Pengaturan Analisis</p>
+
+              <div class="sheet-selector hide">
+                <p class="title">Pilih Lembar</p>
+                <select id="sheet-selector"></select>
+              </div>
+  
+              <div class="analysis-type ral hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Perlakuan</p>
+                    <button class="btn-input" data-input="input-perlakuan-ral">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-perlakuan-ral" placeholder="Pilih Perlakuan" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Kelompok (Ulangan)</p>
+                    <button class="btn-input" data-input="input-kelompok-ral">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kelompok-ral" placeholder="Pilih Kelompok" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Hasil</p>
+                    <button class="btn-input" data-input="input-hasil-ral">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-hasil-ral" placeholder="Pilih Hasil" disabled>
+                    </button>
+                  </div>
+                  <div>
+                    <p class="title">Uji Lanjut</p>
+                    <select name="uji-lanjut" id="uji-lanjut-ral">
+                      <option selected disabled value="">Pilih Uji Lanjut</option>
+                      <option value="bnt">Beda Nyata Terkecil (BNT / Fisher's LSD)</option>
+                      <option value="bnj">Beda Nyata Jujur (BNJ / Tukey's HSD)</option>
+                      <option value="dmrt">Uji Jarak Berganda (DMRT / Duncan's MRT)</option>
+                      <option value="snk">Uji Student-Newman-Keuls (SNK)</option>
+                    </select>
+                  </div>
+                </div>
+                <button class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+
+              <div class="analysis-type ral2f hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Faktor A</p>
+                    <button class="btn-input" data-input="input-faktorA-ral2f">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-faktorA-ral2f" placeholder="Pilih Faktor A" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Faktor B</p>
+                    <button class="btn-input" data-input="input-faktorB-ral2f">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-faktorB-ral2f" placeholder="Pilih Faktor B" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Kelompok (Ulangan)</p>
+                    <button class="btn-input" data-input="input-kelompok-ral2f">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kelompok-ral2f" placeholder="Pilih Kelompok" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Hasil</p>
+                    <button class="btn-input" data-input="input-hasil-ral2f">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-hasil-ral2f" placeholder="Pilih Hasil" disabled>
+                    </button>
+                  </div>
+                  <div>
+                    <p class="title">Uji Lanjut</p>
+                    <select name="uji-lanjut" id="uji-lanjut-ral2f">
+                      <option selected disabled value="">Pilih Uji Lanjut</option>
+                      <option value="bnt">Beda Nyata Terkecil (BNT / Fisher's LSD)</option>
+                      <option value="bnj">Beda Nyata Jujur (BNJ / Tukey's HSD)</option>
+                      <option value="dmrt">Uji Jarak Berganda (DMRT / Duncan's MRT)</option>
+                      <option value="snk">Uji Student-Newman-Keuls (SNK)</option>
+                    </select>
+                  </div>
+                </div>
+                <button class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+
+              <div class="analysis-type ralpt hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Petak Utama (A)</p>
+                    <button class="btn-input" data-input="input-faktorA-ralpt">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-faktorA-ralpt" placeholder="Pilih Petak Utama (A)" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Anak Petak (B)</p>
+                    <button class="btn-input" data-input="input-faktorB-ralpt">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-faktorB-ralpt" placeholder="Pilih Anak Petak (B)" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Kelompok (Ulangan)</p>
+                    <button class="btn-input" data-input="input-kelompok-ralpt">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kelompok-ralpt" placeholder="Pilih Kelompok" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Hasil</p>
+                    <button class="btn-input" data-input="input-hasil-ralpt">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-hasil-ralpt" placeholder="Pilih Hasil" disabled>
+                    </button>
+                  </div>
+                  <div>
+                    <p class="title">Uji Lanjut</p>
+                    <select name="uji-lanjut" id="uji-lanjut-ralpt">
+                      <option selected disabled value="">Pilih Uji Lanjut</option>
+                      <option value="bnt">Beda Nyata Terkecil (BNT / Fisher's LSD)</option>
+                      <option value="bnj">Beda Nyata Jujur (BNJ / Tukey's HSD)</option>
+                      <option value="dmrt">Uji Jarak Berganda (DMRT / Duncan's MRT)</option>
+                      <option value="snk">Uji Student-Newman-Keuls (SNK)</option>
+                    </select>
+                  </div>
+                </div>
+                <button class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+
+              <div class="analysis-type rak hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Perlakuan</p>
+                    <button class="btn-input" data-input="input-perlakuan-rak">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-perlakuan-rak" placeholder="Pilih Perlakuan" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Kelompok (Ulangan)</p>
+                    <button class="btn-input" data-input="input-kelompok-rak">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kelompok-rak" placeholder="Pilih Kelompok" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Hasil</p>
+                    <button class="btn-input" data-input="input-hasil-rak">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-hasil-rak" placeholder="Pilih Hasil" disabled>
+                    </button>
+                  </div>
+                  <div>
+                    <p class="title">Uji Lanjut</p>
+                    <select name="uji-lanjut" id="uji-lanjut-rak">
+                      <option selected disabled value="">Pilih Uji Lanjut</option>
+                      <option value="bnt">Beda Nyata Terkecil (BNT / Fisher's LSD)</option>
+                      <option value="bnj">Beda Nyata Jujur (BNJ / Tukey's HSD)</option>
+                      <option value="dmrt">Uji Jarak Berganda (DMRT / Duncan's MRT)</option>
+                      <option value="snk">Uji Student-Newman-Keuls (SNK)</option>
+                    </select>
+                  </div>
+                </div>
+                <button class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+
+              <div class="analysis-type rak2f hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Faktor A</p>
+                    <button class="btn-input" data-input="input-faktorA-rak2f">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-faktorA-rak2f" placeholder="Pilih Faktor A" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Faktor B</p>
+                    <button class="btn-input" data-input="input-faktorB-rak2f">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-faktorB-rak2f" placeholder="Pilih Faktor B" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Kelompok (Ulangan)</p>
+                    <button class="btn-input" data-input="input-kelompok-rak2f">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kelompok-rak2f" placeholder="Pilih Kelompok" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Hasil</p>
+                    <button class="btn-input" data-input="input-hasil-rak2f">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-hasil-rak2f" placeholder="Pilih Hasil" disabled>
+                    </button>
+                  </div>
+                  <div>
+                    <p class="title">Uji Lanjut</p>
+                    <select name="uji-lanjut" id="uji-lanjut-rak2f">
+                      <option selected disabled value="">Pilih Uji Lanjut</option>
+                      <option value="bnt">Beda Nyata Terkecil (BNT / Fisher's LSD)</option>
+                      <option value="bnj">Beda Nyata Jujur (BNJ / Tukey's HSD)</option>
+                      <option value="dmrt">Uji Jarak Berganda (DMRT / Duncan's MRT)</option>
+                      <option value="snk">Uji Student-Newman-Keuls (SNK)</option>
+                    </select>
+                  </div>
+                </div>
+                <button class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+              
+              <div class="analysis-type rakpt hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Petak Utama (A)</p>
+                    <button class="btn-input" data-input="input-faktorA-rakpt">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-faktorA-rakpt" placeholder="Pilih Petak Utama (A)" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Anak Petak (B)</p>
+                    <button class="btn-input" data-input="input-faktorB-rakpt">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-faktorB-rakpt" placeholder="Pilih Anak Petak (B)" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Kelompok (Ulangan)</p>
+                    <button class="btn-input" data-input="input-kelompok-rakpt">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kelompok-rakpt" placeholder="Pilih Kelompok" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Hasil</p>
+                    <button class="btn-input" data-input="input-hasil-rakpt">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-hasil-rakpt" placeholder="Pilih Hasil" disabled>
+                    </button>
+                  </div>
+                  <div>
+                    <p class="title">Uji Lanjut</p>
+                    <select name="uji-lanjut" id="uji-lanjut-rakpt">
+                      <option selected disabled value="">Pilih Uji Lanjut</option>
+                      <option value="bnt">Beda Nyata Terkecil (BNT / Fisher's LSD)</option>
+                      <option value="bnj">Beda Nyata Jujur (BNJ / Tukey's HSD)</option>
+                      <option value="dmrt">Uji Jarak Berganda (DMRT / Duncan's MRT)</option>
+                      <option value="snk">Uji Student-Newman-Keuls (SNK)</option>
+                    </select>
+                  </div>
+                </div>
+                <button class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+              
+              <div class="analysis-type rakpb hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Jalur Vertikal (A)</p>
+                    <button class="btn-input" data-input="input-faktorA-rakpb">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-faktorA-rakpb" placeholder="Pilih Jalur Vertikal (A)" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Jalur Horizontal (B)</p>
+                    <button class="btn-input" data-input="input-faktorB-rakpb">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-faktorB-rakpb" placeholder="Pilih Jalur Horizontal (B)" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Kelompok (Ulangan)</p>
+                    <button class="btn-input" data-input="input-kelompok-rakpb">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kelompok-rakpb" placeholder="Pilih Kelompok" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Hasil</p>
+                    <button class="btn-input" data-input="input-hasil-rakpb">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-hasil-rakpb" placeholder="Pilih Hasil" disabled>
+                    </button>
+                  </div>
+                  <div>
+                    <p class="title">Uji Lanjut</p>
+                    <select name="uji-lanjut" id="uji-lanjut-rakpb">
+                      <option selected disabled value="">Pilih Uji Lanjut</option>
+                      <option value="bnt">Beda Nyata Terkecil (BNT / Fisher's LSD)</option>
+                      <option value="bnj">Beda Nyata Jujur (BNJ / Tukey's HSD)</option>
+                      <option value="dmrt">Uji Jarak Berganda (DMRT / Duncan's MRT)</option>
+                      <option value="snk">Uji Student-Newman-Keuls (SNK)</option>
+                    </select>
+                  </div>
+                </div>
+                <button class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+              
+              <div class="analysis-type rbsl hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Baris</p>
+                    <button class="btn-input" data-input="input-baris-rbsl">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-baris-rbsl" placeholder="Pilih Baris" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Kolom</p>
+                    <button class="btn-input" data-input="input-kolom-rbsl">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kolom-rbsl" placeholder="Pilih Kolom" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Perlakuan</p>
+                    <button class="btn-input" data-input="input-perlakuan-rbsl">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-perlakuan-rbsl" placeholder="Pilih Perlakuan" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Hasil</p>
+                    <button class="btn-input" data-input="input-hasil-rbsl">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-hasil-rbsl" placeholder="Pilih Hasil" disabled>
+                    </button>
+                  </div>
+                  <div>
+                    <p class="title">Uji Lanjut</p>
+                    <select name="uji-lanjut" id="uji-lanjut-rbsl">
+                      <option selected disabled value="">Pilih Uji Lanjut</option>
+                      <option value="bnt">Beda Nyata Terkecil (BNT / Fisher's LSD)</option>
+                      <option value="bnj">Beda Nyata Jujur (BNJ / Tukey's HSD)</option>
+                      <option value="dmrt">Uji Jarak Berganda (DMRT / Duncan's MRT)</option>
+                      <option value="snk">Uji Student-Newman-Keuls (SNK)</option>
+                    </select>
+                  </div>
+                </div>
+                <button class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+
+              <div class="analysis-type rbslg hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Baris</p>
+                    <button class="btn-input" data-input="input-baris-rbslg">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-baris-rbslg" placeholder="Pilih Baris" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Kolom</p>
+                    <button class="btn-input" data-input="input-kolom-rbslg">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kolom-rbslg" placeholder="Pilih Kolom" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Latin</p>
+                    <button class="btn-input" data-input="input-latin-rbslg">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-latin-rbslg" placeholder="Pilih Latin" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Yunani</p>
+                    <button class="btn-input" data-input="input-yunani-rbslg">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-yunani-rbslg" placeholder="Pilih Yunani" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Hasil</p>
+                    <button class="btn-input" data-input="input-hasil-rbslg">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-hasil-rbslg" placeholder="Pilih Hasil" disabled>
+                    </button>
+                  </div>
+                  <div>
+                    <p class="title">Uji Lanjut</p>
+                    <select name="uji-lanjut" id="uji-lanjut-rbslg">
+                      <option selected disabled value="">Pilih Uji Lanjut</option>
+                      <option value="bnt">Beda Nyata Terkecil (BNT / Fisher's LSD)</option>
+                      <option value="bnj">Beda Nyata Jujur (BNJ / Tukey's HSD)</option>
+                      <option value="dmrt">Uji Jarak Berganda (DMRT / Duncan's MRT)</option>
+                      <option value="snk">Uji Student-Newman-Keuls (SNK)</option>
+                    </select>
+                  </div>
+                </div>
+                <button class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+
+              <div class="analysis-type rba hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Baris</p>
+                    <button class="btn-input" data-input="input-baris-rba">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-baris-rba" placeholder="Pilih Baris" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Kolom</p>
+                    <button class="btn-input" data-input="input-kolom-rba">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kolom-rba" placeholder="Pilih Kolom" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Perlakuan</p>
+                    <button class="btn-input" data-input="input-perlakuan-rba">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-perlakuan-rba" placeholder="Pilih Perlakuan" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Hasil</p>
+                    <button class="btn-input" data-input="input-hasil-rba">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-hasil-rba" placeholder="Pilih Hasil" disabled>
+                    </button>
+                  </div>
+                  <div>
+                    <p class="title">Uji Lanjut</p>
+                    <select name="uji-lanjut" id="uji-lanjut-rba">
+                      <option selected disabled value="">Pilih Uji Lanjut</option>
+                      <option value="bnt">Beda Nyata Terkecil (BNT / Fisher's LSD)</option>
+                      <option value="bnj">Beda Nyata Jujur (BNJ / Tukey's HSD)</option>
+                      <option value="dmrt">Uji Jarak Berganda (DMRT / Duncan's MRT)</option>
+                      <option value="snk">Uji Student-Newman-Keuls (SNK)</option>
+                    </select>
+                  </div>
+                </div>
+                <button class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+
+              <div class="analysis-type isat hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Kelompok</p>
+                    <button class="btn-input" data-input="input-kelompok-isat">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kelompok-isat" placeholder="Pilih Kelompok" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Hasil Normal</p>
+                    <button class="btn-input" data-input="input-normal-isat">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-normal-isat" placeholder="Pilih Hasil Normal" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Hasil Stres</p>
+                    <button class="btn-input" data-input="input-stres-isat">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-stres-isat" placeholder="Pilih Hasil Stres" disabled>
+                    </button>
+                  </div>
+                </div>
+                <button id="isat-lakukan" class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+
+              <div class="analysis-type lpt hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Waktu</p>
+                    <button class="btn-input" data-input="input-waktu-lpt">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-waktu-lpt" placeholder="Pilih Waktu" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Luas Lahan</p>
+                    <button class="btn-input" data-input="input-luaslahan-lpt">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-luaslahan-lpt" placeholder="Pilih Luas Lahan" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Berat Kering</p>
+                    <button class="btn-input" data-input="input-beratkering-lpt">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-beratkering-lpt" placeholder="Pilih Berat Kering" disabled>
+                    </button>
+                  </div>
+                </div>
+                <button id="lpt-lakukan" class="lakukan-analisis"><span>Analisis</span></button>
+              </div>
+
+              <div class="analysis-type lpn hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Waktu</p>
+                    <button class="btn-input" data-input="input-waktu-lpn">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-waktu-lpn" placeholder="Pilih Waktu" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Berat Kering</p>
+                    <button class="btn-input" data-input="input-beratkering-lpn">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-beratkering-lpn" placeholder="Pilih Berat Kering" disabled>
+                    </button>
+                  </div>
+                </div>
+                <button id="lpn-lakukan" class="lakukan-analisis"><span>Analisis</span></button>
+              </div>
+
+              <div class="analysis-type dld hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Waktu</p>
+                    <button class="btn-input" data-input="input-waktu-dld">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-waktu-dld" placeholder="Pilih Waktu" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Luas Daun</p>
+                    <button class="btn-input" data-input="input-luasdaun-dld">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-luasdaun-dld" placeholder="Pilih Luas Daun" disabled>
+                    </button>
+                  </div>
+                </div>
+                <button id="dld-lakukan" class="lakukan-analisis"><span>Analisis</span></button>
+              </div>
+  
+              <div class="analysis-type ldg hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Kelompok</p>
+                    <button class="btn-input" data-input="input-kelompok-ldg">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kelompok-ldg" placeholder="Pilih Kelompok" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Berat Kertas Replika</p>
+                    <button class="btn-input" data-input="input-beratkertasreplika-ldg">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-beratkertasreplika-ldg" placeholder="Pilih Berat Kertas Replika" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Berat Total Kertas</p>
+                    <button class="btn-input" data-input="input-berattotalkertas-ldg">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-berattotalkertas-ldg" placeholder="Pilih Berat Total Kertas" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Luas Total Kertas</p>
+                    <button class="btn-input" data-input="input-luastotalkertas-ldg">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-luastotalkertas-ldg" placeholder="Pilih Luas Total Kertas" disabled>
+                    </button>
+                  </div>
+                </div>
+                <button id="ldg-lakukan" class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+
+              <div class="analysis-type ldp hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Kelompok</p>
+                    <button class="btn-input" data-input="input-kelompok-ldp">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kelompok-ldp" placeholder="Pilih Kelompok" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Berat Kering Bulatan Daun</p>
+                    <button class="btn-input" data-input="input-beratkeringbulatandaun-ldp">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-beratkeringbulatandaun-ldp" placeholder="Pilih Berat Kering Bulatan Daun" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Berat Kering Daun Terlubang	</p>
+                    <button class="btn-input" data-input="input-beratkeringdaunterlubang-ldp">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-beratkeringdaunterlubang-ldp" placeholder="Pilih Berat Kering Daun Terlubang	" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Jumlah Bulatan Daun</p>
+                    <button class="btn-input" data-input="input-jumlahbulatandaun-ldp">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-jumlahbulatandaun-ldp" placeholder="Pilih Jumlah Bulatan Daun" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Luas Satu Lubang</p>
+                    <button class="btn-input" data-input="input-luassatulubang-ldp">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-luassatulubang-ldp" placeholder="Pilih Luas Satu Lubang" disabled>
+                    </button>
+                  </div>
+                </div>
+                <button id="ldp-lakukan" class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+
+              <div class="analysis-type ild hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Luas Daun</p>
+                    <button class="btn-input" data-input="input-luasdaun-ild">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-luasdaun-ild" placeholder="Pilih Luas Daun" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Jarak Tanam</p>
+                    <button class="btn-input" data-input="input-jaraktanam-ild">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-jaraktanam-ild" placeholder="Pilih Jarak Tanam" disabled>
+                    </button>
+                  </div>
+                </div>
+                <button id="ild-lakukan" class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+
+              <div class="analysis-type lds hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Kelompok</p>
+                    <button class="btn-input" data-input="input-kelompok-lds">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kelompok-lds" placeholder="Pilih Kelompok" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Luas Daun</p>
+                    <button class="btn-input" data-input="input-luasdaun-lds">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-luasdaun-lds" placeholder="Pilih Luas Daun" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Berat Kering Daun</p>
+                    <button class="btn-input" data-input="input-beratkeringdaun-lds">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-beratkeringdaun-lds" placeholder="Pilih Berat Kering Daun" disabled>
+                    </button>
+                  </div>
+                </div>
+                <button id="lds-lakukan" class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+              
+              <div class="analysis-type nld hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Kelompok</p>
+                    <button class="btn-input" data-input="input-kelompok-nld">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kelompok-nld" placeholder="Pilih Kelompok" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Luas Daun</p>
+                    <button class="btn-input" data-input="input-luasdaun-nld">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-luasdaun-nld" placeholder="Pilih Luas Daun" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Berat Kering Tanaman</p>
+                    <button class="btn-input" data-input="input-beratkeringtanaman-nld">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-beratkeringtanaman-nld" placeholder="Pilih Berat Kering Tanaman" disabled>
+                    </button>
+                  </div>
+                </div>
+                <button id="nld-lakukan" class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+
+              <div class="analysis-type nbd hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Kelompok</p>
+                    <button class="btn-input" data-input="input-kelompok-nbd">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kelompok-nbd" placeholder="Pilih Kelompok" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Berat Kering Daun</p>
+                    <button class="btn-input" data-input="input-beratkeringdaun-nbd">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-beratkeringdaun-nbd" placeholder="Pilih Berat Kering Daun" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Berat Kering Tanaman</p>
+                    <button class="btn-input" data-input="input-beratkeringtanaman-nbd">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-beratkeringtanaman-nbd" placeholder="Pilih Berat Kering Tanaman" disabled>
+                    </button>
+                  </div>
+                </div>
+                <button id="nbd-lakukan" class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+              
+              <div class="analysis-type lab hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Waktu</p>
+                    <button class="btn-input" data-input="input-waktu">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-waktu" placeholder="Pilih Waktu" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Berat Kering</p>
+                    <button class="btn-input" data-input="input-beratkering">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-beratkering" placeholder="Pilih Berat Kering" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Luas Daun</p>
+                    <button class="btn-input" data-input="input-luasdaun">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-luasdaun" placeholder="Pilih Luas Daun" disabled>
+                    </button>
+                  </div>
+                </div>
+                <button id="lab-lakukan" class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+
+              <div class="analysis-type inp hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Kelompok</p>
+                    <button class="btn-input" data-input="input-kelompok-inp">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kelompok-inp" placeholder="Pilih Kelompok" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Biomassa Ekonomis</p>
+                    <button class="btn-input" data-input="input-ekonomis-inp">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-ekonomis-inp" placeholder="Pilih Biomassa Ekonomis" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Biomassa Total</p>
+                    <button class="btn-input" data-input="input-total-inp">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-total-inp" placeholder="Pilih Biomassa Total" disabled>
+                    </button>
+                  </div>
+                </div>
+                <button id="inp-lakukan" class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+              
+              <div class="analysis-type npa hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Kelompok</p>
+                    <button class="btn-input" data-input="input-kelompok-npa">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kelompok-npa" placeholder="Pilih Kelompok" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Biomassa Shoot</p>
+                    <button class="btn-input" data-input="input-shoot-npa">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-shoot-npa" placeholder="Pilih Biomassa Shoot" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Biomassa Root</p>
+                    <button class="btn-input" data-input="input-root-npa">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-root-npa" placeholder="Pilih Biomassa Root" disabled>
+                    </button>
+                  </div>
+                </div>
+                <button id="npa-lakukan" class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+
+              <div class="analysis-type nba hide">
+                <div class="column-selector">
+                  <div class="select-from-table">
+                    <p class="title">Kelompok</p>
+                    <button class="btn-input" data-input="input-kelompok-nba">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-kelompok-nba" placeholder="Pilih Kelompok" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Biomassa Root</p>
+                    <button class="btn-input" data-input="input-root-nba">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-root-nba" placeholder="Pilih Biomassa Root" disabled>
+                    </button>
+                  </div>
+                  <div class="select-from-table">
+                    <p class="title">Biomassa Total</p>
+                    <button class="btn-input" data-input="input-total-nba">
+                      <div class="select-icon"></div>
+                      <input type="text" id="input-total-nba" placeholder="Pilih Biomassa Total" disabled>
+                    </button>
+                  </div>
+                </div>
+                <button id="nba-lakukan" class='lakukan-analisis'><span>Analisis</span></button>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <section id="output">
+
+          <div class="hasil-avs-ral hide">
+            <div class="sec-title grid">
+              <span>Analisis Varians (ANOVA)</span>
+              <div>
+                <span>Angka di belakang koma: </span>
+                <div class="desimal">
+                  <span class="min">-</span>
+                  <input type="number" name="desimal" class="desimal-input" min="0" max="20" value="2">
+                  <span class="plus">+</span>
+                </div>
+              </div>
+            </div>
+            <div class="tabel-anova"></div>
+            <div class="sec-title grid">
+              <span>Uji Lanjut <sub></sub></span>
+              <div>
+                <label for="uji-lanjut-urutan">Urutkan data dari nilai: </label>
+                <select name="uji-lanjut-urutan" id="uji-lanjut-urutan">
+                  <option value="kecil" selected>Terkecil</option>
+                  <option value="besar">Terbesar</option>
+                </select>
+              </div>
+            </div>
+            <div class="tabel-nilaiuji">
+              <div class="berganda">
+                <table>
+                  <tr id="loopRow">
+                    <th>Perlakuan</th> 
+                  </tr>
+                  <tr id="ujiLanjutRow">
+                    <th>Nilai Uji Lanjut</th>
+                  </tr>
+                  <tr id="ujiLanjutHitRow">
+                    <th>Nilai Uji Lanjut Hitung</th>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="tabel-pengujian">
+              <div class="tabel-judul">Perlakuan</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi"></div>
+                <div class="tabel-uji-lanjut"></div>
+              </div>
+            </div>
+            <div class="sec-title">Grafik Plot</div>
+            <div class="plot">
+              <div class="left">
+                <div class="sec-title">Boxplot</div>
+                <div class="container boxplot"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin</div>
+                <div class="container violin"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hasil-avs-ral2f hide">
+            <div class="sec-title grid">
+              <span>Analisis Varians (ANOVA)</span>
+              <div>
+                <span>Angka di belakang koma: </span>
+                <div class="desimal">
+                  <span class="min">-</span>
+                  <input type="number" name="desimal" class="desimal-input" min="0" max="20" value="2">
+                  <span class="plus">+</span>
+                </div>
+              </div>
+            </div>
+            <div class="tabel-anova"></div>
+            <div class="sec-title grid">
+              <span>Uji Lanjut <sub></sub></span>
+              <div>
+                <label for="uji-lanjut-urutan">Urutkan data dari nilai: </label>
+                <select name="uji-lanjut-urutan" id="uji-lanjut-urutan">
+                  <option value="kecil" selected>Terkecil</option>
+                  <option value="besar">Terbesar</option>
+                </select>
+              </div>
+            </div>
+            <div class="tabel-nilaiuji">
+              <div class="berganda">
+                <table>
+                  <tr id="loopRow">
+                    <th>Perlakuan</th> 
+                  </tr>
+                  <tr id="ujiLanjutRow"></tr>
+                  <tr id="ujiLanjutHitRow"></tr>
+                  <tr id="ujiLanjutHitRowA"></tr>
+                  <tr id="ujiLanjutHitRowB"></tr>
+                </table>
+              </div>
+            </div>
+            <div class="tabel-pengujian">
+              <div class="tabel-judul">Interaksi</div>
+              <div class="tabel-isi faktorial">
+                <div class="tabel-notasi"></div>
+                <div class="tabel-uji-lanjut"></div>
+              </div>
+              <div class="tabel-judul">Non Interaksi Faktor A</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-non-a"></div>
+                <div class="tabel-uji-lanjut-non-a"></div>
+              </div>
+              <div class="tabel-judul">Non Interaksi Faktor B</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-non-b"></div>
+                <div class="tabel-uji-lanjut-non-b"></div>
+              </div>
+            </div>
+            <div class="sec-title">Grafik Plot</div>
+            <div class="plot">
+              <div class="left">
+                <div class="sec-title">Boxplot Faktor A</div>
+                <div class="container boxplot-a"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Faktor A</div>
+                <div class="container violin-a"></div>
+              </div>
+              <div class="left">
+                <div class="sec-title">Boxplot Faktor B</div>
+                <div class="container boxplot-b"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Faktor B</div>
+                <div class="container violin-b"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hasil-avs-ralpt hide">
+            <div class="sec-title grid">
+              <span>Analisis Varians (ANOVA)</span>
+              <div>
+                <span>Angka di belakang koma: </span>
+                <div class="desimal">
+                  <span class="min">-</span>
+                  <input type="number" name="desimal" class="desimal-input" min="0" max="20" value="2">
+                  <span class="plus">+</span>
+                </div>
+              </div>
+            </div>
+            <div class="tabel-anova"></div>
+            <div class="sec-title grid">
+              <span>Uji Lanjut <sub></sub></span>
+              <div>
+                <label for="uji-lanjut-urutan">Urutkan data dari nilai: </label>
+                <select name="uji-lanjut-urutan" id="uji-lanjut-urutan">
+                  <option value="kecil" selected>Terkecil</option>
+                  <option value="besar">Terbesar</option>
+                </select>
+              </div>
+            </div>
+            <div class="tabel-nilaiuji">
+              <div class="berganda">
+                <table>
+                  <tr id="loopRow">
+                    <th>Perlakuan</th> 
+                  </tr>
+                  <tr id="ujiLanjutRow"></tr>
+                  <tr id="ujiLanjutHitRow"></tr>
+                  <tr id="ujiLanjutHitRowA"></tr>
+                  <tr id="ujiLanjutHitRowB"></tr>
+                </table>
+              </div>
+            </div>
+            <div class="tabel-pengujian">
+              <div class="tabel-judul">Interaksi</div>
+              <div class="tabel-isi faktorial">
+                <div class="tabel-notasi"></div>
+                <div class="tabel-uji-lanjut"></div>
+              </div>
+              <div class="tabel-judul">Non Interaksi Faktor A</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-non-a"></div>
+                <div class="tabel-uji-lanjut-non-a"></div>
+              </div>
+              <div class="tabel-judul">Non Interaksi Faktor B</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-non-b"></div>
+                <div class="tabel-uji-lanjut-non-b"></div>
+              </div>
+            </div>
+            <div class="sec-title">Grafik Plot</div>
+            <div class="plot">
+              <div class="left">
+                <div class="sec-title">Boxplot Faktor A</div>
+                <div class="container boxplot-a"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Faktor A</div>
+                <div class="container violin-a"></div>
+              </div>
+              <div class="left">
+                <div class="sec-title">Boxplot Faktor B</div>
+                <div class="container boxplot-b"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Faktor B</div>
+                <div class="container violin-b"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hasil-avs-rak hide">
+            <div class="sec-title grid">
+              <span>Analisis Varians (ANOVA)</span>
+              <div>
+                <span>Angka di belakang koma: </span>
+                <div class="desimal">
+                  <span class="min">-</span>
+                  <input type="number" name="desimal" class="desimal-input" min="0" max="20" value="2">
+                  <span class="plus">+</span>
+                </div>
+              </div>
+            </div>
+            <div class="tabel-anova"></div>
+            <div class="sec-title grid">
+              <span>Uji Lanjut <sub></sub></span>
+              <div>
+                <label for="uji-lanjut-urutan">Urutkan data dari nilai: </label>
+                <select name="uji-lanjut-urutan" id="uji-lanjut-urutan">
+                  <option value="kecil" selected>Terkecil</option>
+                  <option value="besar">Terbesar</option>
+                </select>
+              </div>
+            </div>
+            <div class="tabel-nilaiuji">
+              <div class="berganda">
+                <table>
+                  <tr id="loopRow">
+                    <th>Perlakuan</th> 
+                  </tr>
+                  <tr id="ujiLanjutRow">
+                    <th>Nilai Uji Lanjut</th>
+                  </tr>
+                  <tr id="ujiLanjutHitRow">
+                    <th>Nilai Uji Lanjut Hitung</th>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="tabel-pengujian">
+              <div class="tabel-judul">Perlakuan</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi"></div>
+                <div class="tabel-uji-lanjut"></div>
+              </div>
+            </div>
+            <div class="sec-title">Grafik Plot</div>
+            <div class="plot">
+              <div class="left">
+                <div class="sec-title">Boxplot</div>
+                <div class="container boxplot"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin</div>
+                <div class="container violin"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hasil-avs-rak2f hide">
+            <div class="sec-title grid">
+              <span>Analisis Varians (ANOVA)</span>
+              <div>
+                <span>Angka di belakang koma: </span>
+                <div class="desimal">
+                  <span class="min">-</span>
+                  <input type="number" name="desimal" class="desimal-input" min="0" max="20" value="2">
+                  <span class="plus">+</span>
+                </div>
+              </div>
+            </div>
+            <div class="tabel-anova"></div>
+            <div class="sec-title grid">
+              <span>Uji Lanjut <sub></sub></span>
+              <div>
+                <label for="uji-lanjut-urutan">Urutkan data dari nilai: </label>
+                <select name="uji-lanjut-urutan" id="uji-lanjut-urutan">
+                  <option value="kecil" selected>Terkecil</option>
+                  <option value="besar">Terbesar</option>
+                </select>
+              </div>
+            </div>
+            <div class="tabel-nilaiuji">
+              <div class="berganda">
+                <table>
+                  <tr id="loopRow">
+                    <th>Perlakuan</th> 
+                  </tr>
+                  <tr id="ujiLanjutRow"></tr>
+                  <tr id="ujiLanjutHitRow"></tr>
+                  <tr id="ujiLanjutHitRowA"></tr>
+                  <tr id="ujiLanjutHitRowB"></tr>
+                </table>
+              </div>
+            </div>
+            <div class="tabel-pengujian">
+              <div class="tabel-judul">Interaksi</div>
+              <div class="tabel-isi faktorial">
+                <div class="tabel-notasi"></div>
+                <div class="tabel-uji-lanjut"></div>
+              </div>
+              <div class="tabel-judul">Non Interaksi Faktor A</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-non-a"></div>
+                <div class="tabel-uji-lanjut-non-a"></div>
+              </div>
+              <div class="tabel-judul">Non Interaksi Faktor B</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-non-b"></div>
+                <div class="tabel-uji-lanjut-non-b"></div>
+              </div>
+            </div>
+            <div class="sec-title">Grafik Plot</div>
+            <div class="plot">
+              <div class="left">
+                <div class="sec-title">Boxplot Faktor A</div>
+                <div class="container boxplot-a"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Faktor A</div>
+                <div class="container violin-a"></div>
+              </div>
+              <div class="left">
+                <div class="sec-title">Boxplot Faktor B</div>
+                <div class="container boxplot-b"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Faktor B</div>
+                <div class="container violin-b"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hasil-avs-rakpt hide">
+            <div class="sec-title grid">
+              <span>Analisis Varians (ANOVA)</span>
+              <div>
+                <span>Angka di belakang koma: </span>
+                <div class="desimal">
+                  <span class="min">-</span>
+                  <input type="number" name="desimal" class="desimal-input" min="0" max="20" value="2">
+                  <span class="plus">+</span>
+                </div>
+              </div>
+            </div>
+            <div class="tabel-anova"></div>
+            <div class="sec-title grid">
+              <span>Uji Lanjut <sub></sub></span>
+              <div>
+                <label for="uji-lanjut-urutan">Urutkan data dari nilai: </label>
+                <select name="uji-lanjut-urutan" id="uji-lanjut-urutan">
+                  <option value="kecil" selected>Terkecil</option>
+                  <option value="besar">Terbesar</option>
+                </select>
+              </div>
+            </div>
+            <div class="tabel-nilaiuji">
+              <div class="berganda">
+                <table>
+                  <tr id="loopRow">
+                    <th>Perlakuan</th> 
+                  </tr>
+                  <tr id="ujiLanjutRow"></tr>
+                  <tr id="ujiLanjutHitRow"></tr>
+                  <tr id="ujiLanjutHitRowA"></tr>
+                  <tr id="ujiLanjutHitRowB"></tr>
+                </table>
+              </div>
+            </div>
+            <div class="tabel-pengujian">
+              <div class="tabel-judul">Interaksi</div>
+              <div class="tabel-isi faktorial">
+                <div class="tabel-notasi"></div>
+                <div class="tabel-uji-lanjut"></div>
+              </div>
+              <div class="tabel-judul">Non Interaksi Faktor A</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-non-a"></div>
+                <div class="tabel-uji-lanjut-non-a"></div>
+              </div>
+              <div class="tabel-judul">Non Interaksi Faktor B</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-non-b"></div>
+                <div class="tabel-uji-lanjut-non-b"></div>
+              </div>
+            </div>
+            <div class="sec-title">Grafik Plot</div>
+            <div class="plot">
+              <div class="left">
+                <div class="sec-title">Boxplot Faktor A</div>
+                <div class="container boxplot-a"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Faktor A</div>
+                <div class="container violin-a"></div>
+              </div>
+              <div class="left">
+                <div class="sec-title">Boxplot Faktor B</div>
+                <div class="container boxplot-b"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Faktor B</div>
+                <div class="container violin-b"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hasil-avs-rakpb hide">
+            <div class="sec-title grid">
+              <span>Analisis Varians (ANOVA)</span>
+              <div>
+                <span>Angka di belakang koma: </span>
+                <div class="desimal">
+                  <span class="min">-</span>
+                  <input type="number" name="desimal" class="desimal-input" min="0" max="20" value="2">
+                  <span class="plus">+</span>
+                </div>
+              </div>
+            </div>
+            <div class="tabel-anova"></div>
+            <div class="sec-ujilanjut hide sec-title grid">
+              <span>Uji Lanjut <sub></sub></span>
+              <div>
+                <label for="uji-lanjut-urutan">Urutkan data dari nilai: </label>
+                <select name="uji-lanjut-urutan" id="uji-lanjut-urutan">
+                  <option value="kecil" selected>Terkecil</option>
+                  <option value="besar">Terbesar</option>
+                </select>
+              </div>
+            </div>
+            <div class="sec-ujilanjut hide tabel-nilaiuji">
+              <div class="berganda">
+                <table>
+                  <tr id="loopRow">
+                    <th>Perlakuan</th> 
+                  </tr>
+                  <tr id="ujiLanjutRow"></tr>
+                  <tr id="ujiLanjutHitRow"></tr>
+                  <tr id="ujiLanjutHitRowA"></tr>
+                  <tr id="ujiLanjutHitRowB"></tr>
+                </table>
+              </div>
+            </div>
+            <div class="sec-ujilanjut hide tabel-pengujian">
+              <div class="tabel-judul">Interaksi</div>
+              <div class="tabel-isi faktorial">
+                <div class="tabel-notasi"></div>
+                <div class="tabel-uji-lanjut"></div>
+              </div>
+              <div class="tabel-judul">Non Interaksi Faktor A</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-non-a"></div>
+                <div class="tabel-uji-lanjut-non-a"></div>
+              </div>
+              <div class="tabel-judul">Non Interaksi Faktor B</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-non-b"></div>
+                <div class="tabel-uji-lanjut-non-b"></div>
+              </div>
+            </div>
+            <div class="sec-title">Grafik Plot</div>
+            <div class="plot">
+              <div class="left">
+                <div class="sec-title">Boxplot Faktor A</div>
+                <div class="container boxplot-a"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Faktor A</div>
+                <div class="container violin-a"></div>
+              </div>
+              <div class="left">
+                <div class="sec-title">Boxplot Faktor B</div>
+                <div class="container boxplot-b"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Faktor B</div>
+                <div class="container violin-b"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hasil-avs-rbsl hide">
+            <div class="sec-title grid">
+              <span>Analisis Varians (ANOVA)</span>
+              <div>
+                <span>Angka di belakang koma: </span>
+                <div class="desimal">
+                  <span class="min">-</span>
+                  <input type="number" name="desimal" class="desimal-input" min="0" max="20" value="2">
+                  <span class="plus">+</span>
+                </div>
+              </div>
+            </div>
+            <div class="tabel-anova"></div>
+            <div class="sec-title grid">
+              <span>Uji Lanjut <sub></sub></span>
+              <div>
+                <label for="uji-lanjut-urutan">Urutkan data dari nilai: </label>
+                <select name="uji-lanjut-urutan" id="uji-lanjut-urutan">
+                  <option value="kecil" selected>Terkecil</option>
+                  <option value="besar">Terbesar</option>
+                </select>
+              </div>
+            </div>
+            <div class="tabel-nilaiuji">
+              <div class="berganda">
+                <table>
+                  <tr id="loopRow">
+                    <th>Perlakuan</th> 
+                  </tr>
+                  <tr id="ujiLanjutRow"></tr>
+                  <tr id="ujiLanjutHitRow"></tr>
+                </table>
+              </div>
+            </div>
+            <div class="tabel-pengujian">
+              <div class="tabel-judul">Perlakuan</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-perlakuan"></div>
+                <div class="tabel-uji-lanjut-perlakuan"></div>
+              </div>
+              <div class="tabel-judul">Baris</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-baris"></div>
+                <div class="tabel-uji-lanjut-baris"></div>
+              </div>
+              <div class="tabel-judul">Kolom</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-kolom"></div>
+                <div class="tabel-uji-lanjut-kolom"></div>
+              </div>
+            </div>
+            <div class="sec-title">Grafik Plot</div>
+            <div class="plot">
+              <div class="left">
+                <div class="sec-title">Boxplot Baris</div>
+                <div class="container boxplot-baris"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Baris</div>
+                <div class="container violin-baris"></div>
+              </div>
+              <div class="left">
+                <div class="sec-title">Boxplot Kolom</div>
+                <div class="container boxplot-kolom"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Kolom</div>
+                <div class="container violin-kolom"></div>
+              </div>
+              <div class="left">
+                <div class="sec-title">Boxplot Perlakuan</div>
+                <div class="container boxplot-perlakuan"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Perlakuan</div>
+                <div class="container violin-perlakuan"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hasil-avs-rbslg hide">
+            <div class="sec-title grid">
+              <span>Analisis Varians (ANOVA)</span>
+              <div>
+                <span>Angka di belakang koma: </span>
+                <div class="desimal">
+                  <span class="min">-</span>
+                  <input type="number" name="desimal" class="desimal-input" min="0" max="20" value="2">
+                  <span class="plus">+</span>
+                </div>
+              </div>
+            </div>
+            <div class="tabel-anova"></div>
+            <div class="sec-title grid">
+              <span>Uji Lanjut <sub></sub></span>
+              <div>
+                <label for="uji-lanjut-urutan">Urutkan data dari nilai: </label>
+                <select name="uji-lanjut-urutan" id="uji-lanjut-urutan">
+                  <option value="kecil" selected>Terkecil</option>
+                  <option value="besar">Terbesar</option>
+                </select>
+              </div>
+            </div>
+            <div class="tabel-nilaiuji">
+              <div class="berganda">
+                <table>
+                  <tr id="loopRow">
+                    <th>Perlakuan</th> 
+                  </tr>
+                  <tr id="ujiLanjutRow"></tr>
+                  <tr id="ujiLanjutHitRow"></tr>
+                </table>
+              </div>
+            </div>
+            <div class="tabel-pengujian">
+              <div class="tabel-judul">Baris</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-baris"></div>
+                <div class="tabel-uji-lanjut-baris"></div>
+              </div>
+              <div class="tabel-judul">Kolom</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-kolom"></div>
+                <div class="tabel-uji-lanjut-kolom"></div>
+              </div>
+              <div class="tabel-judul">Latin</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-latin"></div>
+                <div class="tabel-uji-lanjut-latin"></div>
+              </div>
+              <div class="tabel-judul">Yunani</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-yunani"></div>
+                <div class="tabel-uji-lanjut-yunani"></div>
+              </div>
+            </div>
+            <div class="sec-title">Grafik Plot</div>
+            <div class="plot">
+              <div class="left">
+                <div class="sec-title">Boxplot Baris</div>
+                <div class="container boxplot-baris"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Baris</div>
+                <div class="container violin-baris"></div>
+              </div>
+              <div class="left">
+                <div class="sec-title">Boxplot Kolom</div>
+                <div class="container boxplot-kolom"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Kolom</div>
+                <div class="container violin-kolom"></div>
+              </div>
+              <div class="left">
+                <div class="sec-title">Boxplot Latin</div>
+                <div class="container boxplot-latin"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Latin</div>
+                <div class="container violin-latin"></div>
+              </div>
+              <div class="left">
+                <div class="sec-title">Boxplot Yunani</div>
+                <div class="container boxplot-yunani"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Yunani</div>
+                <div class="container violin-yunani"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hasil-avs-rba hide">
+            <div class="sec-title grid">
+              <span>Analisis Varians (ANOVA)</span>
+              <div>
+                <span>Angka di belakang koma: </span>
+                <div class="desimal">
+                  <span class="min">-</span>
+                  <input type="number" name="desimal" class="desimal-input" min="0" max="20" value="2">
+                  <span class="plus">+</span>
+                </div>
+              </div>
+            </div>
+            <div class="tabel-anova"></div>
+            <div class="sec-title grid">
+              <span>Uji Lanjut <sub></sub></span>
+              <div>
+                <label for="uji-lanjut-urutan">Urutkan data dari nilai: </label>
+                <select name="uji-lanjut-urutan" id="uji-lanjut-urutan">
+                  <option value="kecil" selected>Terkecil</option>
+                  <option value="besar">Terbesar</option>
+                </select>
+              </div>
+            </div>
+            <div class="tabel-nilaiuji">
+              <div class="berganda">
+                <table>
+                  <tr id="loopRow">
+                    <th>Perlakuan</th> 
+                  </tr>
+                  <tr id="ujiLanjutRow"></tr>
+                  <tr id="ujiLanjutHitRow"></tr>
+                </table>
+              </div>
+            </div>
+            <div class="tabel-pengujian">
+              <div class="tabel-judul">Perlakuan</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-perlakuan"></div>
+                <div class="tabel-uji-lanjut-perlakuan"></div>
+              </div>
+              <div class="tabel-judul">Baris</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-baris"></div>
+                <div class="tabel-uji-lanjut-baris"></div>
+              </div>
+              <div class="tabel-judul">Kolom</div>
+              <div class="tabel-isi">
+                <div class="tabel-notasi-kolom"></div>
+                <div class="tabel-uji-lanjut-kolom"></div>
+              </div>
+            </div>
+            <div class="sec-title">Grafik Plot</div>
+            <div class="plot">
+              <div class="left">
+                <div class="sec-title">Boxplot Baris</div>
+                <div class="container boxplot-baris"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Baris</div>
+                <div class="container violin-baris"></div>
+              </div>
+              <div class="left">
+                <div class="sec-title">Boxplot Kolom</div>
+                <div class="container boxplot-kolom"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Kolom</div>
+                <div class="container violin-kolom"></div>
+              </div>
+              <div class="left">
+                <div class="sec-title">Boxplot Perlakuan</div>
+                <div class="container boxplot-perlakuan"></div>
+              </div>
+              <div class="right">
+                <div class="sec-title">Violin Perlakuan</div>
+                <div class="container violin-perlakuan"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hasil-isat hide">
+            <div class="sec-title">Hasil Perhitungan Indeks Total Abiotik Tanaman</div>
+            <div id="hasil-isat"></div>
+          </div>
+
+          <div class="hasil-lpt hide">
+            <div class="sec-title">Hasil Perhitungan Laju Pertumbuhan Tanaman</div>
+            <div id="hasil-lpt"></div>
+          </div>
+
+          <div class="hasil-lpn hide">
+            <div class="sec-title">Hasil Perhitungan Laju Pertumbuhan Nisbi</div>
+            <div id="hasil-lpn"></div>
+          </div>
+
+          <div class="hasil-lab hide">
+            <div class="sec-title">Hasil Perhitungan Laju Asimilasi Bersih</div>
+            <div id="hasil-lab"></div>
+          </div>
+
+          <div class="hasil-ild hide">
+            <div class="sec-title">Hasil Perhitungan Indeks Luas Daun</div>
+            <div id="hasil-ild"></div>
+          </div>
+
+          <div class="hasil-ldg hide">
+            <div class="sec-title">Hasil Perhitungan Indeks Luas Daun</div>
+            <div id="hasil-ldg"></div>
+          </div>
+
+          <div class="hasil-ldp hide">
+            <div class="sec-title">Hasil Perhitungan Indeks Luas Daun</div>
+            <div id="hasil-ldp"></div>
+          </div>
+
+          <div class="hasil-lds hide">
+            <div class="sec-title">Hasil Perhitungan Luas Daun Spesifik</div>
+            <div id="hasil-lds"></div>
+          </div>
+
+          <div class="hasil-nld hide">
+            <div class="sec-title">Hasil Perhitungan Nisbah Luas Daun</div>
+            <div id="hasil-nld"></div>
+          </div>
+
+          <div class="hasil-nbd hide">
+            <div class="sec-title">Hasil Perhitungan Nisbah Luas Daun</div>
+            <div id="hasil-nbd"></div>
+          </div>
+
+          <div class="hasil-dld hide">
+            <div class="sec-title">Hasil Perhitungan Durasi Luas Daun</div>
+            <div id="hasil-dld"></div>
+          </div>
+
+          <div class="hasil-inp hide">
+            <div class="sec-title">Hasil Perhitungan Indeks Panen</div>
+            <div id="hasil-inp"></div>
+          </div>
+
+          <div class="hasil-npa hide">
+            <div class="sec-title">Hasil Perhitungan Nisbah Pucuk-Akar</div>
+            <div id="hasil-npa"></div>
+          </div>
+
+          <div class="hasil-nba hide">
+            <div class="sec-title">Hasil Perhitungan Nisbah Berat Akar</div>
+            <div id="hasil-nba"></div>
+          </div>
+
+        </section>
+
+        <section id="help">
+          <div class="sec-title">Bantuan CropID</div>
+          <div class="content">
+
+            <div class="item">
+              <div class="title">
+                <span>Cara dasar menggunakan CropID</span>
+              </div>
+              <div class="desc">
+                <div class="subitem">
+                  <div class="left"><img src="./src/help/dasar-1.png" alt=""></div>
+                  <div class="right">
+                    <p>Pertama, silahkan pilih analisis apa yang ingin dilakukan.</p>
+                  </div>
+                </div>
+                <div class="subitem">
+                  <div class="left"><img src="./src/help/dasar-2.png" alt=""></div>
+                  <div class="right">
+                    <p>Kemudian, unggah data yang akan dianalisis berupa file Excel. Format yang didukung antara lain xls, xlsx, xlsm, xlsb, xlt, xltx, xltm, dan csv.</p>
+                  </div>
+                </div>
+                <div class="subitem">
+                  <div class="left"><img src="./src/help/dasar-3.png" alt=""></div>
+                  <div class="right">
+                    <p>Pilih salah satu sheet yang ingin anda buka.</p>
+                  </div>
+                </div>
+                <div class="subitem">
+                  <div class="left"><img src="./src/help/dasar-4.png" alt=""></div>
+                  <div class="right">
+                    <p>Lengkapi setiap kebutuhan pengaturan analisis yang ada dengan cara mengklik tombol <img src="./src/img/icon-select.png" alt="">, lalu pilih table head yang mendefinisikan pengaturan tersebut.</p>
+                  </div>
+                </div>
+                <div class="subitem">
+                  <div class="left"><img src="./src/help/dasar-5.png" alt=""></div>
+                  <div class="right">
+                    <p>Setelah semua pengaturan diisi, klik tombol analisis.</p>
+                  </div>
+                </div>
+                <div class="subitem">
+                  <div class="left"><img src="./src/help/dasar-6.png" alt=""></div>
+                  <div class="right">
+                    <p>Hasil analisis akan tersedia dan dapat diunduh/salin.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="title">
+                <span>Analisis varians (ANOVA)</span>
+              </div>
+              <div class="desc">
+                <div class="subitem">
+                  <div class="left"><img src="./src/help/avs-1.png" alt=""></div>
+                  <div class="right">
+                    <div>
+                      <p>Analisis varians memiliki 5 pengaturan, yaitu:</p>
+                      <ul>
+                        <li>Perlakuan : Perlakuan (treatments) yang digunakan pada penelitian.</li>
+                        <li>Ulangan (blok) : Blok atau pembagian perlakuan.</li>
+                        <li>Hasil : Output yang akan dianalisis.</li>
+                        <li>Rancangan : Jenis rancangan ANOVA yang ingin digunakan.</li>
+                        <li>Uji lanjut : Jenis uji lanjut (perbandingan berganda) yang ingin digunakan.</li>
+                      </ul>
+                      <br>
+                      <p>Excel harus memiliki kolom:</p>
+                      <ul>
+                        <li>Perlakuan</li>
+                        <li>Blok</li>
+                        <li>Hasil</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <footer>Hak Cipta © 2024 CropID oleh Ozik Jarwo</footer>
+        </section>
+
+        <section id="ozik" class="hide">
+          <div class="wrap">
+            <p class="title">CropID</p>
+            <p class="ver">v0.0.1-beta - init_16/8/2024</p>
+            <p class="desc">CropID merupakan web app untuk membantu analisis penelitian di bidang pertanian, seperti pengujian, laju pertumbuhan, analisis daun, rasio berat dan panen, serta toleransi stres.<br><br>Kritik, saran, dan masukan sangat diharapkan. Hubungi saya melalui:</p>
+            <p class="contact">Ozik Putra Jarwo (+62 8565 4141 926) <br>jarwoozik08@gmail.com</p>
+          </div>
+        </section>
+
+        <div id="log"></div>
+
+      </main>
+
+    </div>
+
+    <script src="./src/js/all.js"></script>
+
+  </body>
+
+</html>
