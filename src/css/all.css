@@ -681,15 +681,17 @@ body.cell #input .left #table-wrapper table tr:first-child {
   gap: 0.7rem;
   align-items: center;
   margin-top: 0.2rem;
+  justify-content: center;
 }
 
 #input .right .analysis-type .column-selector .btn-input .select-icon {
   cursor: pointer;
-  width: 25px;
-  height: 25px;
-  background: url(../../src/img/icon-select.png);
-  background-size: contain;
-  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: +1;
 }
 
 #input .right .analysis-type .column-selector .btn-input input {
@@ -697,13 +699,30 @@ body.cell #input .left #table-wrapper table tr:first-child {
   font-size: 0.8rem;
   opacity: .9;
   margin-top: 2px;
-  width: calc(100% - 25px);
+  width: 100%;
+  text-align: center;
+  background: unset;
 }
 
 #input .right .analysis-type .column-selector>div {
-  padding: 0.4rem 0.9rem;
+  padding: 1rem;
   border-radius: 0.3rem;
   background: #ebebeb;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  line-height: 1;
+  justify-content: center;
+}
+
+#input .right .analysis-type .column-selector .select-from-table {
+  transition: .2s all;
+}
+
+#input .right .analysis-type .column-selector .select-from-table:hover, #input .right .analysis-type .column-selector .select-from-table.active {
+  background: #b5b5b5;
 }
 
 #input .right .analysis-type .column-selector select {
@@ -713,7 +732,7 @@ body.cell #input .left #table-wrapper table tr:first-child {
   background: white;
   padding: 0.4rem 0.5rem;
   font-size: 0.8rem;
-  margin: .5rem 0;
+  margin: .5rem 0 0;
   border-radius: .3rem;
   background: linear-gradient(45deg, #266bac 0%, #266bac9c 100%);
   border-right: .2rem solid #709bc4;
