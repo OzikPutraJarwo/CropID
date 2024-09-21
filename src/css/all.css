@@ -1126,115 +1126,196 @@ section#ozik p.ver {
 }
 
 @media (max-width: 900px) {
-html {
-    font-size: 14px
+  html {
+      font-size: 14px
+  }
+
+  .type {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+  }
+
+  #input {
+      display: block;
+  }
+
+  #input .left {
+      display: grid;
+      margin-bottom: 2rem;
+  }
+
+  #input .left #table-wrapper #table-container {
+      max-height: 150px;
+  }
+
+  #output .plot {
+      grid-template-columns: 1fr;
+  }
+
+  #output .plot .container {
+      max-width: calc(100dvw - 8rem);
+  }
+
+  #container {
+      display: block;
+  }
+
+  header {
+      position: fixed;
+      z-index: 100;
+      height: 60px;
+      top: 0;
+      width: 100%;
+      padding: 0;
+  }
+
+  header .wrap {
+      position: unset;
+      height: 60px;
+      display: flex;
+      flex-direction: row;
+      padding: 0.3rem 0.6rem;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+
+  header img {
+      height: 100%;
+  }
+
+  header .top, header .bottom {
+      display: flex;
+      height: 100%;
+  }
+
+  header .menu, header .help {
+      margin-top: 0;
+      display: flex;
+      flex-direction: row;
+  }
+
+  header .icon {
+      margin: 0.8rem;
+  }
+
+  header .icon:after {
+      width: 100% !important;
+      height: 0;
+      top: unset;
+      bottom: -1.1rem;
+      left: 0;
+  }
+
+  header .icon.active:after {
+      height: 0.3rem !important;
+  }
+
+  header .logo, header .help {
+      cursor: pointer;
+      margin: 0.3rem;
+      font-size: 0;
+      transition: .2s all;
+      position: relative;
+  }
+
+  header .top {
+      gap: 0.8rem;
+  }
+
+  header .icon.ozik {
+      margin: 0.4rem;
+  }
+
+  main section {
+      padding: calc(1rem + 60px) 1rem 1rem 1rem;
+  }
+
+  #output [class*="hasil-avs"] .sec-title.grid {
+      grid-template-columns: 1fr;
+  }
+
+  #output [class*="hasil-avs"] .sec-title.grid div {
+      justify-content: flex-start;
+  }
 }
 
-.type {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-}
+@media (max-width: 500px) {
+  .type {
+      grid-template-columns: 1fr;
+  }
 
-#input {
-    display: block;
-}
+  .type > div {
+      padding: 1.5rem 1.5rem 4rem 1.5rem;
+  }
 
-#input .left {
-    display: grid;
-    margin-bottom: 2rem;
-}
+  .type > div img {
+      width: 60px;
+  }
 
-#input .left #table-wrapper #table-container {
-    max-height: 150px;
-}
+  .type > div sub, .type > div p {
+      padding-right: 4rem;
+  }
 
-#output .plot {
-    grid-template-columns: 1fr;
-}
+  #greet {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+  }
 
-#output .plot .container {
-    max-width: calc(100dvw - 8rem);
-}
+  #greet .center {
+      grid-column: span 2;
+      order: 1;
+  }
 
-#container {
-    display: block;
-}
+  #input .left {
+      gap: 1rem;
+      margin-bottom: 1rem;
+  }
 
-header {
-    position: fixed;
-    z-index: 100;
-    height: 60px;
-    top: 0;
-    width: 100%;
-    padding: 0;
-}
+  #input .left #file {
+      gap: 1.5rem;
+  }
 
-header .wrap {
-    position: unset;
-    height: 60px;
-    display: flex;
-    flex-direction: row;
-    padding: 0.3rem 0.6rem;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
+  #input .left #file label {
+      padding: 2rem;
+  }
 
-header img {
-    height: 100%;
-}
+  #input .left #file img {
+      width: 5rem;
+  }
 
-header .top, header .bottom {
-    display: flex;
-    height: 100%;
-}
+  #output .plot .container {
+      max-width: unset;
+  }
 
-header .menu, header .help {
-    margin-top: 0;
-    display: flex;
-    flex-direction: row;
-}
+  #help, #help .content {
+      gap: 1rem;
+  }
 
-header .icon {
-    margin: 0.8rem;
-}
+  #help .item .title {
+      padding: 1rem;
+  }
 
-header .icon:after {
-    width: 100% !important;
-    height: 0;
-    top: unset;
-    bottom: -1.1rem;
-    left: 0;
-}
+  #help .item .title:after {
+      width: 20px;
+      height: 20px;
+      margin-top: 5px;
+  }
 
-header .icon.active:after {
-    height: 0.3rem !important;
-}
+  #help .item .desc .subitem {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+  }
 
-header .logo, header .help {
-    cursor: pointer;
-    margin: 0.3rem;
-    font-size: 0;
-    transition: .2s all;
-    position: relative;
-}
+  header .icon {
+      margin: 0.8rem 0.5rem;
+  }
 
-header .top {
-    gap: 0.8rem;
-}
+  header .help {
+      margin: .3rem .5rem;
+  }
 
-header .icon.ozik {
-    margin: 0.4rem;
-}
-
-main section {
-    padding: calc(1rem + 60px) 1rem 1rem 1rem;
-}
-
-#output [class*="hasil-avs"] .sec-title.grid {
-    grid-template-columns: 1fr;
-}
-
-#output [class*="hasil-avs"] .sec-title.grid div {
-    justify-content: flex-start;
-}
+  header .logo {
+      margin: .5rem 1rem .5rem .7rem;
+  }
 }
