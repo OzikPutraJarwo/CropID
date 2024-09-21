@@ -16,6 +16,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="shortcut icon" href="./src/img/CropID.png" type="image/x-icon">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3P690MJ87E"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-3P690MJ87E');
+    </script>
   </head>
 
   <body>
@@ -185,7 +195,7 @@
             <div class="isat">
               <h3>Indeks Total Abiotik Tanaman</h3>
               <sub>Plant Abiotic Totals Index - PASI</sub>
-              <p>Alat 9 in 1: indeks toleransi, kerentanan, Total, keberlanjutan hasil, dan lain-lain.</p>
+              <p>Alat 10 in 1: indeks toleransi, kerentanan, Total, keberlanjutan hasil, dan lain-lain.</p>
               <p class="hide">Indeks Toleransi Total (ITS) Totals Tolerance Index (STI), Indeks Kerentanan Total (IKS) Totals Susceptibility Index (SSI), Indeks Toleransi (ITO) Tolerance Index (TOL), Indeks Keberlanjutan Hasil (IKH) Yield Stability Index (YSI), Indeks Hasil Geometris (IHG) Geometric Mean Productivity (GMP), Indeks Harmonik Hasil (IHH) Harmonic Mean (HM), Indeks Rata-rata Hasil Relatif (IRHR) Mean Productivity (MP), Indeks Rata-rata Geometris Relatif (IRGR) Relative Geometric Mean Productivity (RGMP), Indeks Rata-rata Harmonik Relatif (IRHR) Relative Harmonic Mean Productivity (RHMP)</p>
               <img src="./src/img/type-isat.png" alt="isat">
           </div>
@@ -314,6 +324,10 @@
             <div class="wrap">
 
               <p class="sec-title">Pengaturan Analisis</p>
+
+              <div class="analysis-type">
+                <p>Pilih jenis analisis terlebih dahulu</p>
+              </div>
 
               <div class="sheet-selector hide">
                 <p class="title">Pilih Lembar</p>
@@ -1138,6 +1152,10 @@
         </section>
 
         <section id="output">
+
+          <div>
+            <p>Lakukan analisis terlebih dahulu</p>
+          </div>
 
           <div class="hasil-avs-ral hide">
             <div class="sec-title grid">
@@ -1980,7 +1998,7 @@
                 <div class="subitem">
                   <div class="left"><img src="./src/help/dasar-4.png" alt=""></div>
                   <div class="right">
-                    <p>Lengkapi setiap kebutuhan pengaturan analisis yang ada dengan cara mengklik tombol <img src="./src/img/icon-select.png" alt="">, lalu pilih table head yang mendefinisikan pengaturan tersebut.</p>
+                    <p>Lengkapi setiap kebutuhan pengaturan analisis yang ada dengan cara mengklik pengaturannya, lalu pilih <i>table head</i> yang mendefinisikan pengaturan tersebut.</p>
                   </div>
                 </div>
                 <div class="subitem">
@@ -1998,7 +2016,7 @@
               </div>
             </div>
 
-            <div class="item">
+            <div class="item hide">
               <div class="title">
                 <span>Analisis varians (ANOVA)</span>
               </div>
@@ -2035,7 +2053,7 @@
         <section id="ozik" class="hide">
           <div class="wrap">
             <p class="title">CropID</p>
-            <p class="ver">v0.0.1-beta - init_16/8/2024</p>
+            <p class="ver">v0.0.1-beta | init_16/8/2024</p>
             <p class="desc">CropID merupakan web app untuk membantu analisis penelitian di bidang pertanian, seperti pengujian, laju pertumbuhan, analisis daun, rasio berat dan panen, serta toleransi stres.<br><br>Kritik, saran, dan masukan sangat diharapkan. Hubungi saya melalui:</p>
             <p class="contact">Ozik Putra Jarwo (+62 8565 4141 926) <br>jarwoozik08@gmail.com</p>
           </div>

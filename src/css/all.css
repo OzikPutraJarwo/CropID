@@ -673,6 +673,10 @@ body.cell #input .left #table-wrapper table tr:first-child {
   gap: 1rem;
 }
 
+#input .right .analysis-type .column-selector > div:not(.select-from-table) {
+  grid-column: span 2;
+}
+
 #input .right .analysis-type .column-selector .btn-input {
   width: 100%;
   border: none;
@@ -854,6 +858,18 @@ body.cell #input .left #table-wrapper table tr:first-child {
 #output .desimal input::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+#output .tabel-anova {
+  overflow: auto;
+}
+
+#output .tabel-anova table {
+  min-width: 700px;
+}
+
+#output .tabel-uji-lanjut table td {
+  overflow: hidden;
 }
 
 #output .tabel-pengujian {
