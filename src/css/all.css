@@ -894,6 +894,7 @@ body.cell #input .left #table-wrapper table tr:first-child {
 
 #output .tabel-isi td {
   position: relative;
+  overflow: hidden;
 }
 
 #output .tabel-isi td[data-p]:after {
@@ -1170,6 +1171,10 @@ section#ozik p.ver {
 
   #output .plot .container {
       max-width: calc(100dvw - 8rem);
+  }
+
+  #output #hasil-isat {
+    max-width: unset;
   }
 
   #container {
