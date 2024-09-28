@@ -422,6 +422,10 @@ section#home h2 {
   background-image: linear-gradient(45deg, #234d96 0%, #234d9685 100%);
 }
 
+.type>div.ipb:before {
+  background-image: linear-gradient(45deg, #23965e 0%, #23964f85 100%);
+}
+
 .type>div.ild:before,
 .type>div.ldg:before,
 .type>div.ldp:before,
